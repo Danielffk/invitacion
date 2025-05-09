@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitación de Cumpleaños</title>
+  <style>
+    body {
+      background-color: #fff0f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .sobre {
+      position: relative;
+      width: 400px;
+      height: 550px;
+      background: #ffc0cb;
+      border: 2px solid #ff69b4;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      cursor: pointer;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .corazon {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: red;
+      transform: rotate(-45deg);
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      z-index: 3;
+      animation: latido 1s infinite;
+    }
+
+    .corazon::before,
+    .corazon::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .corazon::before {
+      top: -60px;
+      left: 0;
+    }
+
+    .corazon::after {
+      left: 60px;
+      top: 0;
+    }
+
+    .texto-corazon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: bold;
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .tarjeta {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+      z-index: 1;
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .sobre.abierto .tarjeta {
+      display: block;
+    }
+
+    .sobre.abierto .corazon,
+    .sobre.abierto .texto-corazon {
+      display: none;
+    }
+
+    @keyframes latido {
+      0%, 100% {
+        transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) rotate(-45deg) scale(1.1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sobre" onclick="abrirSobre()">
+    <div class="corazon"></div>
+    <img src="invitacion.jpg" alt="Invitación de cumpleaños" class="tarjeta">
+  </div>
+
+  <audio id="sonidoSobre" src="sonido.mp3"></audio>
+
+  <script>
+    function abrirSobre() {
+      const sobre = document.querySelector('.sobre');
+      const sonido = document.getElementById('sonidoSobre');
+      sobre.classList.add('abierto');
+      sonido.play();
+    }
+  </script>
+</body>
+</html>
